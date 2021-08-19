@@ -1,13 +1,27 @@
 package com.example.demo;
 
+import javax.persistence.*;
+
+@Entity
+@Table
+
 public class Stock {
     private String symbol;
+
+    @Id
     private String Date;
+
+    @Column(nullable = false)
     private double open;
+    @Column(nullable = false)
     private double high;
+    @Column(nullable = false)
     private double low;
+    @Column(nullable = false)
     private double close;
+    @Column(nullable = false)
     private double adjclose;
+    @Column(nullable = false)
     private double volume;
 
     public Stock(String symbol, String date, double open, double high, double low, double close, double adjclose, double volume) {

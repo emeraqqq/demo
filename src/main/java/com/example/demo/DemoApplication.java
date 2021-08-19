@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //主入口
 @SpringBootApplication
@@ -19,9 +18,12 @@ public class DemoApplication {
 
         ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
 
+        StockServiceImp stockService = ctx.getBean("StockService", StockServiceImp.class);
+        stockService.fillStocks();
     }
+
     @Bean
-    public ArrayList<Stock> loadData() {
+    public ArrayList<Stock> loadData(StockRepository stockRepository) {
         String[] tmp = {"002007.SZ","510500.SS"};
         ArrayList<Stock> stock = new ArrayList<Stock>();
         try {
@@ -48,7 +50,10 @@ public class DemoApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        stockRepository.saveAll(stock);
         return stock;
     }
+
+
 
 }

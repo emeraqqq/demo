@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public interface StockService {
     List<Stock> showStock(String symbol);

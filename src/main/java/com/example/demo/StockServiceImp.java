@@ -1,27 +1,27 @@
 package com.example.demo;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service
+
+@Service("StockService")
 public class StockServiceImp implements StockService {
-    @Autowired
-    private ArrayList<Stock> data;
+    private final StockRepository stockRepository;
+
     HashMap<String,ArrayList<Stock>> stocks;
 
-    public StockServiceImp(){
-
+    @Autowired
+    public StockServiceImp(StockRepository stockRepository){
+        this.stockRepository = stockRepository;
     }
 
-    @PostConstruct
-    private void fillStocks(){
+//    @PostConstruct
+    public void fillStocks(){
+        ArrayList<Stock> data = (ArrayList<Stock>) stockRepository.findAll();
         stocks = new HashMap<>();
         for (Stock stock:data){
             String symbol = stock.getSymbol();
