@@ -9,6 +9,8 @@ public class Stock {
     private String symbol;
 
     @Id
+    private int id;
+    @Column(nullable = false)
     private String Date;
 
     @Column(nullable = false)
@@ -24,7 +26,8 @@ public class Stock {
     @Column(nullable = false)
     private double volume;
 
-    public Stock(String symbol, String date, double open, double high, double low, double close, double adjclose, double volume) {
+    public Stock(int id,String symbol, String date, double open, double high, double low, double close, double adjclose, double volume) {
+        this.id = id;
         this.symbol = symbol;
         this.Date = date;
         this.open = open;
@@ -43,6 +46,14 @@ public class Stock {
     }
 
     public Stock() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSymbol() {

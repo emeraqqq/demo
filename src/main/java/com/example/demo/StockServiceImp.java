@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -142,12 +143,12 @@ public class StockServiceImp implements StockService {
             adjc+=info.getAdjclose(); v+=info.getVolume();date=info.getDate();
             if(count == number){
                 data += date;
-                tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+                tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
                 count=0;op=0;hi=0;lo=0;cl=0;adjc=0;v=0;
             }
         }
         data += date;
-        tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+        tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
         return tmp;
     }
 
@@ -165,7 +166,7 @@ public class StockServiceImp implements StockService {
             String month = info.getDate().substring(5,7);
             if(prevDate.substring(5,7).compareTo(month) != 0){
                 data += prevDate;
-                tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+                tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
                 op=0;hi=0;lo=0;cl=0;adjc=0;v=0;
                 data = info.getDate() + " - ";
             }
@@ -174,7 +175,7 @@ public class StockServiceImp implements StockService {
             adjc+=info.getAdjclose(); v+=info.getVolume();
         }
         data += prevDate;
-        tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+        tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
         return tmp;
     }
 
@@ -196,7 +197,7 @@ public class StockServiceImp implements StockService {
                 currCal.setTime(sdf.parse(info.getDate()));
                 if(currCal.get(Calendar.DAY_OF_WEEK) < prevCal.get(Calendar.DAY_OF_WEEK)){
                     data += prevDate;
-                    tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+                    tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
                     op=0;hi=0;lo=0;cl=0;adjc=0;v=0;
                     data = info.getDate() + " - ";
                 }
@@ -206,7 +207,7 @@ public class StockServiceImp implements StockService {
                 adjc+=info.getAdjclose(); v+=info.getVolume();
             }
             data += prevDate;
-            tmp.add(new Stock("1",data,op,hi,lo,cl,adjc,v));
+            tmp.add(new Stock(1,"1",data,op,hi,lo,cl,adjc,v));
         }catch(ParseException e){}
         return tmp;
     }

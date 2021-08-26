@@ -1,12 +1,17 @@
 package com.example.demo;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/stock")
 public class StockController {
@@ -17,9 +22,11 @@ public class StockController {
         this.stockServiceImp = stockServiceImp;
     }
 
-    @GetMapping(value="/getStock/{symbol}")
-    public List<Stock> getStock(@PathVariable("symbol") String symbol){
-        return stockServiceImp.showStock(symbol);
+    @GetMapping(value="/getStock/{symbol}", produces = MediaType.APPLICATION_XML_VALUE)
+    public StocksResult getStock(@PathVariable("symbol") String symbol){
+        StocksResult result = new StocksResult();
+        result.setResult(stockServiceImp.showStock(symbol));
+        return result;
     }
 
     @GetMapping(value="/calculateDailyPrice/{symbol}")

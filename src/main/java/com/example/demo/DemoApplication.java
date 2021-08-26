@@ -28,6 +28,7 @@ public class DemoApplication {
         ArrayList<Stock> stock = new ArrayList<Stock>();
         try {
             //(文件完整路径),编码格式
+            int count = 1;
             for(String str:tmp){
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/" + str + ".csv"), "utf-8"));
                 String line = reader.readLine();
@@ -38,18 +39,22 @@ public class DemoApplication {
                     }else{
                         item = line.split("\t");//CSV格式文件时候的分割符,我使用的是\t
                     }
-                    stock.add(new Stock(str,item[0],
+                    stock.add(new Stock(count,str,item[0],
                             Double.parseDouble(item[1]),
                             Double.parseDouble(item[2]),
                             Double.parseDouble(item[3]),
                             Double.parseDouble(item[4]),
                             Double.parseDouble(item[5]),
                             Double.parseDouble(item[6])));
+                    count++;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        /*for (int i = 0; i < stock.size(); i++) {
+            System.out.println(stock);
+        }*/
         stockRepository.saveAll(stock);
         return stock;
     }
