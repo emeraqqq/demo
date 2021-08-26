@@ -1,3 +1,4 @@
+var data,config,myChart,painted=false;
 function showStock(){
     var xhttp = new XMLHttpRequest();
     //this part of code only executed after xhttp.send(),if backend give back 200, we process the data returned
@@ -29,7 +30,7 @@ function drawGraph(xhttp,symbol){
             y:parseFloat(stocks[i].getElementsByTagName("close")[0].textContent)});
     }
     //everything below are just using api, variable data and config are just preparing paramters.Make sure you type the syntax right
-    const data = {
+    data = {
       datasets: [{
           pointRadius: 1,
           label: symbol,
@@ -39,7 +40,7 @@ function drawGraph(xhttp,symbol){
         }]
     };
     
-    const config = {
+    config = {
       type: 'line',
       data: data,
       options: {
@@ -53,8 +54,12 @@ function drawGraph(xhttp,symbol){
     };
     //If you want to draw graph again and again, make sure you clear the canvas before you draw!!!!!!!!!
     //I didn't implement this right now..
-    var myChart = new Chart(
+    if(painted){
+      myChart.destroy();
+    }
+    myChart = new Chart(
       document.getElementById('myChart'),
       config
     );
+    painted = true;
 }
