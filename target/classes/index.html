@@ -10,6 +10,7 @@
     <script src="calculate.js" type="application/javascript"></script>
     <script src="getStock.js" type="application/javascript"></script>
     <script src="tailHead.js" type="application/javascript"></script>
+    <script src="sortStock.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="">
@@ -38,12 +39,51 @@
         <button onclick="getTail()">search</button>
     </div>
     <div class="col">
+        <p>Want to sort stock?Tell us stock symbol,sorting reference and whether you want to reverse the result</p>
+        Symbol:
+        <input id="sortSymbolInput" value="002007.SZ"></input>
+        Reference:
+        <input id="sortReferenceInput" value="close"></input>
+        Reverse:
+        <select id="sortReverseInput">
+            <option value="2">false</option>
+            <option value="1">true</option>
+        </select>
+        <button onclick="sortStock()">search</button>
+    </div>
+    <div class="col">
         <p>please enter for average price</p>
         <input id="symbol" value="002007.SZ"></input>
         <input id="days" value=5></input>
         <input id="date" value="2018-01-02"></input>
         <button onclick="calculateAverage()">calculate</button>
-        <p id="result" ></p>
+        <p id="result" >0</p>
+    </div>
+    <div class="col">
+
+        <p>please enter for daily price</p>
+        <input id="symbol1" value="002007.SZ"></input>
+        <input id="date1" value="2018-01-02"></input>
+        <button onclick="calculateDailyPrice()">calculate</button>
+        <p id="result1" >0</p>
+    </div>
+    <div class="col">
+
+        <p>please enter for Max and Min</p>
+        <input id="symbol2" value="002007.SZ"></input>
+        <button onclick="showMax()">max</button>
+        <button onclick="showMin()">min</button>
+        <p id="result2-1" >0</p>
+        <p id="result2-2" >0</p>
+    </div>
+    <div class="col">
+
+        <p>please enter for std</p>
+        <input id="symbol3" value="002007.SZ"></input>
+        <input id="days3" value=5></input>
+        <input id="date3" value="2018-01-02"></input>
+        <button onclick="calculatestd()">calculate</button>
+        <p id="result3" >0</p>
     </div>
 
 

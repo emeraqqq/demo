@@ -13,7 +13,7 @@ function showStock(){
     xhttp.send();
 }
 
-function drawGraph(xhttp,symbol){
+function drawGraph(xhttp,symbol,reference="close"){
     //format of data returned is <StockResult><result>*all the data*</result></StockResult>,depend on how you implment it in backend
     //see StocksResult.java and getStock method in StockController.java
     //just use getElementsByTagName("result"), it gives you all the data
@@ -27,7 +27,7 @@ function drawGraph(xhttp,symbol){
         tmp.push(
             //whatever data you want to get, just getElementsByTagName("xxxxxx")[0], for exmaple,getElementsByTagName("close")[0]
             {x:stocks[i].getElementsByTagName("date")[0].textContent,
-            y:parseFloat(stocks[i].getElementsByTagName("close")[0].textContent)});
+            y:parseFloat(stocks[i].getElementsByTagName(reference)[0].textContent)});
     }
     //everything below are just using api, variable data and config are just preparing paramters.Make sure you type the syntax right
     data = {
@@ -47,7 +47,7 @@ function drawGraph(xhttp,symbol){
         plugins: {
           title: {
             display: true,
-            text: 'Close value of ' + symbol
+            text: reference + ' value of ' + symbol
           }
         }
       },
