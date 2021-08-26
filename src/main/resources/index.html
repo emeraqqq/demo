@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Utils.js" type="application/javascript"></script>
+    <script src="calculate.js" type="application/javascript"></script>
     <script src="getStock.js" type="application/javascript"></script>
 </head>
 <body>
@@ -15,45 +16,27 @@
 </div>
 <div class="row">
     <div class="col">
-        <a class="btn btn-warning" href="" role="button">showStock</a>
+
         <p>please enter stock symbol:either 510500.SS or 002007.SZ</p>
-        <input id="showStockInput" value="510500.SS"></input>
+        <input id="showStockInput" value="002007.SZ"></input>
         <button onclick="showStock()">search</button>
     </div>
+    <div class="col">
 
-    <div class="col">
-        <a class="btn btn-warning" href="" role="button"> calculateDailyPrice</a>
+        <p>please enter for average price</p>
+        <input id="symbol" value="002007.SZ"></input>
+        <input id="days" value=5></input>
+        <input id="date" value="2018-01-02"></input>
+        <button onclick="calculateAverage()">calculate</button>
+        <p id="result" ></p>
     </div>
-    <div class="col">
-        <a class="btn btn-warning" href="" role="button"> calculateAverage</a>
-    </div>
-    <div class="col">
-        <a class="btn btn-warning" href="" role="button"> showMaxPrice</a>
-    </div>
-    <div class="col">
-        <a class="btn btn-warning" href="" role="button"> head</a>
-    </div>
-    <div class="col">
-        <a class="btn btn-warning" href="" role="button"> groupByMonth</a>
-    </div>
+
+
 </div>
 <div>
     <canvas id="myChart"></canvas>
 </div>
 </body>
 <script>
-    /*(function(){
-                 $.ajax({ type:"get",
-                     url:"localhost:8111/stock/getStock/002007.SZ",
-                         success:function(data){
-                             $("body").empty();
-                            for(var i=0;i<data.length;i++){
-                                    console.log("asd");
-                                    //感觉这里得create <tr>element一条一条显示 但不会
-                                 }
-                         }
-                 })
-             })();*/
-
 </script>
 </html>
