@@ -9,6 +9,8 @@
     <script src="Utils.js" type="application/javascript"></script>
     <script src="calculate.js" type="application/javascript"></script>
     <script src="getStock.js" type="application/javascript"></script>
+    <script src="tailHead.js" type="application/javascript"></script>
+    <script src="sortStock.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="">
@@ -16,13 +18,40 @@
 </div>
 <div class="row">
     <div class="col">
-
-        <p>please enter stock symbol:either 510500.SS or 002007.SZ</p>
+        <p>Want to show stock info?Enter stock symbol:either 510500.SS or 002007.SZ</p>
         <input id="showStockInput" value="002007.SZ"></input>
         <button onclick="showStock()">search</button>
     </div>
     <div class="col">
-
+        <p>Want to first N stock info?Enter stock symbol and amount</p>
+        Symbol:
+        <input id="headSymbolInput" value="002007.SZ"></input>
+        Amount:
+        <input id="headAmountInput" value="10"></input>
+        <button onclick="getHead()">search</button>
+    </div>
+    <div class="col">
+        <p>Want to last N stock info?Enter stock symbol and amount</p>
+        Symbol:
+        <input id="tailSymbolInput" value="002007.SZ"></input>
+        Amount:
+        <input id="tailAmountInput" value="10"></input>
+        <button onclick="getTail()">search</button>
+    </div>
+    <div class="col">
+        <p>Want to sort stock?Tell us stock symbol,sorting reference and whether you want to reverse the result</p>
+        Symbol:
+        <input id="sortSymbolInput" value="002007.SZ"></input>
+        Reference:
+        <input id="sortReferenceInput" value="close"></input>
+        Reverse:
+        <select id="sortReverseInput">
+            <option value="2">false</option>
+            <option value="1">true</option>
+        </select>
+        <button onclick="sortStock()">search</button>
+    </div>
+    <div class="col">
         <p>please enter for average price</p>
         <input id="symbol" value="002007.SZ"></input>
         <input id="days" value=5></input>

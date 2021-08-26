@@ -9,7 +9,7 @@ function showStock(){
     };
     //give XMLHTTPREQUEST parameter
     var symbol = document.getElementById("showStockInput").value;
-    xhttp.open("GET", "http://localhost:8111/stock/getStock/" + symbol, true);
+    xhttp.open("GET", "http://localhost:8888/stock/getStock/" + symbol, true);
     xhttp.send();
 }
 
@@ -19,7 +19,7 @@ function drawGraph(xhttp,symbol){
     //just use getElementsByTagName("result"), it gives you all the data
     var xml = xhttp.responseXML;
     console.log(xml);
-    stocks = xml.getElementsByTagName("result");
+    stocks = xml.getElementsByTagName("item");
     var tmp = [];
     for(i=0;i<stocks.length;i++){
         //the data we pass into chartjs api need to be in this format:[{x:??,y:??},{x:??,y:??}]

@@ -23,10 +23,8 @@ public class StockController {
     }
 
     @GetMapping(value="/getStock/{symbol}", produces = MediaType.APPLICATION_XML_VALUE)
-    public StocksResult getStock(@PathVariable("symbol") String symbol){
-        StocksResult result = new StocksResult();
-        result.setResult(stockServiceImp.showStock(symbol));
-        return result;
+    public List<Stock> getStock(@PathVariable("symbol") String symbol){
+        return stockServiceImp.showStock(symbol);
     }
 
     @GetMapping(value="/calculateDailyPrice/{symbol}")
@@ -49,13 +47,13 @@ public class StockController {
         return stockServiceImp.showMinPrice(symbol);
     }
 
-    @GetMapping("head/{symbol}/{number}")
+    @GetMapping(value="/head/{symbol}/{number}",produces = MediaType.APPLICATION_XML_VALUE)
     public List<Stock> head(@PathVariable("number") int number,
                             @PathVariable("symbol")String symbol){
         return stockServiceImp.head(number,symbol);
     }
 
-    @GetMapping("tail/{symbol}/{number}")
+    @GetMapping(value="/tail/{symbol}/{number}",produces = MediaType.APPLICATION_XML_VALUE)
     public List<Stock> tail(@PathVariable("number") int number,
                             @PathVariable("symbol")String symbol) {
         return stockServiceImp.tail(number,symbol);
@@ -77,7 +75,7 @@ public class StockController {
         return stockServiceImp.groupByWeek(symbol);
     }
 
-    @GetMapping(value = "/sort/{symbol}")
+    @GetMapping(value = "/sort/{symbol}",produces = MediaType.APPLICATION_XML_VALUE)
     public List<Stock> sortStock(@RequestParam("reference")String reference,
                                  @RequestParam("reverse")int reverse,
                                  @PathVariable("symbol")String symbol){
