@@ -74,3 +74,23 @@ function showMin(){
     xhttp.open("GET", "http://localhost:8888/stock/showMinPrice/" +symbol2,true);
     xhttp.send();
 }
+function calculatestd(){
+    var xhttp = new XMLHttpRequest();
+    // this part of code only executed after xhttp.send(),if backend give back 200, we process the data returned
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var xml = xhttp.response;
+            //var result= xml.getElementById("double").value;
+            console.log(xml);
+            //$('#result').append(xml);
+            document.getElementById("result3").innerHTML=xml;
+
+        }
+    };
+    //give XMLHTTPREQUEST parameter
+    var symbol3 = document.getElementById("symbol3").value;
+    var days3 = document.getElementById("days3").value;
+    var date3 = document.getElementById("date3").value;
+    xhttp.open("GET", "http://localhost:8888/stock/calculateStd/" + symbol3+"?days="+days3+"&date="+date3, true);
+    xhttp.send();
+}
