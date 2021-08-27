@@ -87,13 +87,13 @@ public class StockController {
         return stockServiceImp.calculateStd(symbol,days,date);
     }
 
-    @GetMapping(value = "/showOhlcv/{symbol}")
+    @GetMapping(value = "/showOhlcv/{symbol}",produces = MediaType.APPLICATION_XML_VALUE)
     public List<Double> showOHLCVol(@RequestParam("ohlcv") String ohlcv,
                                     @PathVariable("symbol") String symbol){
         return stockServiceImp.showOHLCVol(ohlcv,symbol);
     }
 
-    @GetMapping(value = "/showFilter/{symbol}")
+    @GetMapping(value = "/showFilter/{symbol}",produces = MediaType.APPLICATION_XML_VALUE)
     public List<Stock> showFilter(@RequestParam("filter") String filter,
                                   @RequestParam("num") Integer num,
                                   @PathVariable("symbol")String symbol){

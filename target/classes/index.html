@@ -10,6 +10,9 @@
     <script src="calculate.js" type="application/javascript"></script>
     <script src="getStock.js" type="application/javascript"></script>
     <script src="tailHead.js" type="application/javascript"></script>
+    <script src="sortStock.js" type="application/javascript"></script>
+    <script src="showOhlcv.js" type="application/javascript"></script>
+    <script src="showFilter.js" type="application/javascript"></script>
 </head>
 <body>
 <div class="">
@@ -17,12 +20,52 @@
 </div>
 <div class="row">
     <div class="col">
+        <p>please enter symbol, day interval and starting date for average price</p>
+        Symbol:
+        <input id="symbol" value="002007.SZ"></input>
+        Days:
+        <input id="days" value=5></input>
+        Start Date:
+        <input id="date" value="2018-01-02"></input>
+        <button onclick="calculateAverage()">calculate</button>
+        <p id="result" >Average: 0</p>
+    </div>
+    <div class="col">
+        <p>please enter symbol and date for daily price</p>
+        Symbol:
+        <input id="symbol1" value="002007.SZ"></input>
+        Date:
+        <input id="date1" value="2018-01-02"></input>
+        <button onclick="calculateDailyPrice()">calculate</button>
+        <p id="result1" >Daily price: 0</p>
+    </div>
+    <div class="col">
+        <p>please enter symbol for Max and Min</p>
+        Symbol:
+        <input id="symbol2" value="002007.SZ"></input>
+        <button onclick="showMax()">max</button>
+        <button onclick="showMin()">min</button>
+        <p id="result2-1" >Max: 0</p>
+        <p id="result2-2" >Min: 0</p>
+    </div>
+    <div class="col">
+        <p>please enter symbol, day interval and starting date for std</p>
+        Symbol:
+        <input id="symbol3" value="002007.SZ"></input>
+        Days:
+        <input id="days3" value=5></input>
+        Start Date:
+        <input id="date3" value="2018-01-02"></input>
+        <button onclick="calculatestd()">calculate</button>
+        <p id="result3" >Standard deviation: 0</p>
+    </div>
+    <div class="col">
         <p>Want to show stock info?Enter stock symbol:either 510500.SS or 002007.SZ</p>
         <input id="showStockInput" value="002007.SZ"></input>
         <button onclick="showStock()">search</button>
     </div>
-    <div class="col">
-        <p>Want to first N stock info?Enter stock symbol and amount</p>
+    <div class="col"> 
+        <p>Want to see first N stock info?Enter stock symbol and amount</p>
         Symbol:
         <input id="headSymbolInput" value="002007.SZ"></input>
         Amount:
@@ -30,7 +73,7 @@
         <button onclick="getHead()">search</button>
     </div>
     <div class="col">
-        <p>Want to last N stock info?Enter stock symbol and amount</p>
+        <p>Want to see last N stock info?Enter stock symbol and amount</p>
         Symbol:
         <input id="tailSymbolInput" value="002007.SZ"></input>
         Amount:
@@ -38,15 +81,37 @@
         <button onclick="getTail()">search</button>
     </div>
     <div class="col">
-        <p>please enter for average price</p>
-        <input id="symbol" value="002007.SZ"></input>
-        <input id="days" value=5></input>
-        <input id="date" value="2018-01-02"></input>
-        <button onclick="calculateAverage()">calculate</button>
-        <p id="result" ></p>
+        <p>Want to sort stock?Tell us stock symbol,sorting reference and whether you want to reverse the result</p>
+        Symbol:
+        <input id="sortSymbolInput" value="002007.SZ"></input>
+        Reference:
+        <input id="sortReferenceInput" value="close"></input>
+        Reverse:
+        <select id="sortReverseInput">
+            <option value="2">false</option>
+            <option value="1">true</option>
+        </select>
+        <button onclick="sortStock()">search</button>
     </div>
-
-
+    <div class="col">
+        <p>Want to show the 'OHLC' and volume of the stock? Enter the parameter you want to show.</p>
+        Symbol:
+        <input id="symbol5" value="002007.SZ"/>
+        Reference:
+        <input id="ohlcv" value="open"/>
+        <button onclick="showOhlcv()">search</button>
+    </div>
+    <div class="col">
+        <p>Want to filter the stock? Enter stock symbol and the number that you want to be less than.</p>
+        Symbol:
+        <input id="symbol6" value="002007.SZ"/>
+        Filter:
+        <input id="filter" value="open"/>
+        Amount
+        <input id="num" value="15"/>
+        <button onclick="showFilter()">search</button>
+    </div>
+    
 </div>
 <div>
     <canvas id="myChart"></canvas>

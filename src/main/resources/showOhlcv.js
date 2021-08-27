@@ -1,33 +1,35 @@
 var data,config,myChart,painted=false;
-function showStock(){
+function showOhlcv(){
     var xhttp = new XMLHttpRequest();
     //this part of code only executed after xhttp.send(),if backend give back 200, we process the data returned
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          drawGraph(this,symbol);
+          drawOhlcv(this,symbol);
       }
     };
     //give XMLHTTPREQUEST parameter
-    var symbol = document.getElementById("showStockInput").value;
-    xhttp.open("GET", "http://localhost:8888/stock/getStock/" + symbol, true);
+    var symbol = document.getElementById("symbol5").value;
+    var ohlcv = document.getElementById("ohlcv").value;
+    xhttp.open("GET", "http://localhost:8888/stock/showOhlcv/" + symbol + "?ohlcv=" + ohlcv, true);
     xhttp.send();
 }
 
-function drawGraph(xhttp,symbol,reference="close"){
+function drawOhlcv(xhttp,symbol){
     //format of data returned is <StockResult><result>*all the data*</result></StockResult>,depend on how you implment it in backend
     //see StocksResult.java and getStock method in StockController.java
     //just use getElementsByTagName("result"), it gives you all the data
     var xml = xhttp.responseXML;
     console.log(xml);
-    stocks = xml.getElementsByTagName("item");
+    values = xml.getElementsByTagName("item");
+    var ohlcv = document.getElementById("ohlcv").value;
     var tmp = [];
-    for(i=0;i<stocks.length;i++){
+    for(i=0;i<values.length;i++){
         //the data we pass into chartjs api need to be in this format:[{x:??,y:??},{x:??,y:??}]
         //in this function x contains string and y contains float.
         tmp.push(
             //whatever data you want to get, just getElementsByTagName("xxxxxx")[0], for exmaple,getElementsByTagName("close")[0]
-            {x:stocks[i].getElementsByTagName("date")[0].textContent,
-            y:parseFloat(stocks[i].getElementsByTagName(reference)[0].textContent)});
+            {x:i.toString(),
+            y:parseFloat(values[i].textContent)});
     }
     //everything below are just using api, variable data and config are just preparing paramters.Make sure you type the syntax right
     data = {
@@ -47,7 +49,7 @@ function drawGraph(xhttp,symbol,reference="close"){
         plugins: {
           title: {
             display: true,
-            text: reference + ' value of ' + symbol
+            text: ohlcv + ' value of ' + symbol
           }
         }
       },

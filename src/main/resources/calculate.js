@@ -7,7 +7,7 @@ function calculateAverage(){
             //var result= xml.getElementById("double").value;
             console.log(xml);
             //$('#result').append(xml);
-            document.getElementById("result").innerHTML=xml;
+            document.getElementById("result").innerHTML="Average: " + xml;
 
         }
     };
@@ -27,7 +27,7 @@ function calculateDailyPrice(){
             //var result= xml.getElementById("Double").value;
             console.log(xml);
             //$('#result').append(xml);
-            document.getElementById("result1").innerHTML=xml;
+            document.getElementById("result1").innerHTML="Daily price: " + xml;
 
         }
     };
@@ -47,7 +47,7 @@ function showMax(){
             //var result= xml.getElementById("Double").value;
             console.log(xml);
             //$('#result').append(xml);
-            document.getElementById("result2-1").innerHTML=xml;
+            document.getElementById("result2-1").innerHTML="Max: " + xml;
 
         }
     };
@@ -65,7 +65,7 @@ function showMin(){
             //var result= xml.getElementById("Double").value;
             console.log(xml);
             //$('#result').append(xml);
-            document.getElementById("result2-2").innerHTML=xml;
+            document.getElementById("result2-2").innerHTML="Min: " + xml;
 
         }
     };
@@ -83,7 +83,7 @@ function calculatestd(){
             //var result= xml.getElementById("double").value;
             console.log(xml);
             //$('#result').append(xml);
-            document.getElementById("result3").innerHTML=xml;
+            document.getElementById("result3").innerHTML="Standard deviation: " + xml;
 
         }
     };

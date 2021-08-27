@@ -1,25 +1,29 @@
 var data,config,myChart,painted=false;
-function showStock(){
+function showFilter(){
     var xhttp = new XMLHttpRequest();
     //this part of code only executed after xhttp.send(),if backend give back 200, we process the data returned
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-          drawGraph(this,symbol);
+          drawFilter(this,symbol);
       }
     };
     //give XMLHTTPREQUEST parameter
-    var symbol = document.getElementById("showStockInput").value;
-    xhttp.open("GET", "http://localhost:8888/stock/getStock/" + symbol, true);
+    var symbol = document.getElementById("symbol6").value;
+    var filter = document.getElementById("filter").value;
+    var num = document.getElementById("num").value;
+    xhttp.open("GET", "http://localhost:8888/stock/showFilter/" + symbol + "?filter=" + filter + "&num=" + num, true);
     xhttp.send();
 }
 
-function drawGraph(xhttp,symbol,reference="close"){
+function drawFilter(xhttp,symbol){
     //format of data returned is <StockResult><result>*all the data*</result></StockResult>,depend on how you implment it in backend
     //see StocksResult.java and getStock method in StockController.java
     //just use getElementsByTagName("result"), it gives you all the data
     var xml = xhttp.responseXML;
     console.log(xml);
     stocks = xml.getElementsByTagName("item");
+    var filter = document.getElementById("filter").value;
+    var num = document.getElementById("num").value;
     var tmp = [];
     for(i=0;i<stocks.length;i++){
         //the data we pass into chartjs api need to be in this format:[{x:??,y:??},{x:??,y:??}]
@@ -27,7 +31,7 @@ function drawGraph(xhttp,symbol,reference="close"){
         tmp.push(
             //whatever data you want to get, just getElementsByTagName("xxxxxx")[0], for exmaple,getElementsByTagName("close")[0]
             {x:stocks[i].getElementsByTagName("date")[0].textContent,
-            y:parseFloat(stocks[i].getElementsByTagName(reference)[0].textContent)});
+            y:parseFloat(stocks[i].getElementsByTagName(filter)[0].textContent)});
     }
     //everything below are just using api, variable data and config are just preparing paramters.Make sure you type the syntax right
     data = {
@@ -47,7 +51,7 @@ function drawGraph(xhttp,symbol,reference="close"){
         plugins: {
           title: {
             display: true,
-            text: reference + ' value of ' + symbol
+            text: filter + ' value less than ' + num + ' of ' + symbol
           }
         }
       },
